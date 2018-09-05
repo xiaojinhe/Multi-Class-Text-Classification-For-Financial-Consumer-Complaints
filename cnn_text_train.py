@@ -19,24 +19,24 @@ class Configuration(object):
     cleaned_data_file = "./data/cleaned_train_set.csv"
     cleaned_test_file = "./data/cleaned_test_set.csv"
     vocabulary_dir = "./data/vocab.txt"
-    test_percentage = 0.1
+    test_percentage = 0.2
     cv_percentage = 0.1
     # Hyperparameters
-    embedding_size = 128
+    embedding_size = 64
     filter_sizes = [3, 4, 5]
-    num_filters = 128
+    num_filters = 64
     dropout_keep_prob = 0.5
-    l2_reg_lambda = 0.1
+    l2_reg_lambda = 0.0
     seq_length = 900
 
     # cnn training parameters
     batch_size = 64
-    num_epochs = 100
-    checkpoint_dir =  "./trained/1536015152/checkpoints/" 
+    num_epochs = 10
+    checkpoint_dir =  "./trained/1536105995/checkpoints/" 
     #best_validation = "./trained/checkpoints/best_validation/"
     word2vec_path = "./data/word2vec.bin"
     use_pretrained_embedding = False
-    evaluate_every = 200
+    evaluate_every = 500
     learning_rate = 0.001
     save_per_batch = 10 # save summary every 10 batch
 
@@ -127,9 +127,6 @@ def train(x_train, y_train, x_cv, y_cv, vocabulary_size, config):
                     _, step, summaries, loss, accuracy = sess.run([train_op, global_step, summary_op, cnn.loss, cnn.accuracy], feeds)
                     total_loss += loss * batch_len
                     total_accuracy += accuracy * batch_len
-                    """if step % config.save_per_batch == 0:"""
-                """time_str = datetime.datetime.now().isoformat()
-                rint("{}: Step: {}, cv loss: {}, cv accuracy: {}".format(time_str, loss, accuracy))"""
                 if writer:
                     writer.add_summary(summaries, step)
                 data_len = len(x_cv)
@@ -139,7 +136,7 @@ def train(x_train, y_train, x_cv, y_cv, vocabulary_size, config):
             train_batches = batch_iterator(list(zip(x_train, y_train)), config.batch_size, config.num_epochs)
             best_accuracy = 0 # record best accuracy on validation set
             best_step = 0 # track the step of best accuracy 
-            max_improvement_steps = 10000 # if no accuracy improvement between max_improvement_step, stop trainning
+            max_improvement_steps = 8000 # if no accuracy improvement between max_improvement_step, stop trainning
 
             # Training loop: train cnn model with x_train and y_train batch by batch
             for train_batch in train_batches:
@@ -243,9 +240,11 @@ def test(test_file, vocabulary_dir, checkpoint_dir, seq_length):
 
     print("Evaluating precision, recall and F1-score on test set......")
     print(metrics.classification_report(y_true, y_pred, target_names=categories))
+    json.dump(metrics.classification_report(y_true, y_pred, target_names=categories), open("./data/test_metrics.json", 'w'), indent=4)
 
     print("Building confusion matrix......")
     confusion = metrics.confusion_matrix(y_true, y_pred)
+    json.dump(metrics.classification_report(y_true, y_pred, target_names=categories), open("./data/test_metrics.json", 'w'), indent=4)
     print(confusion)
     print("Time usage: {}\n".format(datetime.timedelta(seconds=int(time.time() - start_time))))
 

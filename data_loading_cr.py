@@ -42,7 +42,6 @@ def build_vocabulary(x_raw, y_raw, vocabulary_dir):
     for i, pair in enumerate(label_pairs):
         label, num = pair
         label = str(label)
-        print(label + ": " + num)
         label_to_id[label] = i
         id_to_label[i] = label
 

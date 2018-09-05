@@ -22,9 +22,9 @@ class DataPreprocessing(object):
         cleaned_str = re.sub(r"i\'m", "i am", cleaned_str) 
         cleaned_str = re.sub(r",", " , ", cleaned_str)
         cleaned_str = re.sub(r"!", " ! ", cleaned_str)
-        cleaned_str = re.sub(r"\(", " \( ", cleaned_str)
-        cleaned_str = re.sub(r"\)", " \) ", cleaned_str)
-        cleaned_str = re.sub(r"\?", " \? ", cleaned_str)
+        cleaned_str = re.sub(r"\(", " ( ", cleaned_str)
+        cleaned_str = re.sub(r"\)", " ) ", cleaned_str)
+        cleaned_str = re.sub(r"\?", " ? ", cleaned_str)
         cleaned_str = re.sub(r"[^\x00-\x7f]+", "", cleaned_str)
         cleaned_str = re.sub(r"\S*x{2,}\S*", "xxx", cleaned_str)
         cleaned_str = re.sub(r"\s{2,}", " ", cleaned_str) # delete addtional whitespaces
@@ -42,20 +42,29 @@ class DataPreprocessing(object):
     def clean_data(self, raw_data_file, cleaned_data_file, cleaned_test_file, test_percentage):
         df = pd.read_csv(raw_data_file)
         selected_columns = ['Product', 'Consumer complaint narrative']
-        df.drop(list(set(df.columns) - set(selected_columns)), axis=1, inplace=True)
-        df.dropna(axis=0, how='any', subset=selected_columns, inplace=True)
-        df.reset_index(drop=True, inplace=True)
+        df = df.drop(list(set(df.columns) - set(selected_columns)), axis=1)
+
+        df = df[df.Product != "Bank acount or service"]
+        df = df[df.Product != "Credit card"]
+        df = df[df.Product != "Credit reporting"]
+        df = df[df.Product != "Prepaid card"]
+        df = df[df.Product != "Payday loan"]
+        df = df[df.Product != "Money transfers"]
+        df = df[df.Product != "Virtual currency"]
+
+        df = df.dropna(axis=0, how='any', subset=selected_columns)
+        df = df.reset_index(drop=True)
         # shuffle the data
         shuffled_df = df.reindex(np.random.permutation(df.index))
-        shuffled_df.head()
 
         cleaned_text = []
         for i in range(0, len(shuffled_df)):
             cleaned_text.append(self.clean_text(shuffled_df[selected_columns[1]][i]))
         cleaned_df = pd.DataFrame(cleaned_text, columns=['text'])
         cleaned_df['product'] = shuffled_df[selected_columns[0]]
-        cleaned_df.dropna(axis=0, how='any', inplace=True)
-        cleaned_df.reset_index(drop=True, inplace=True)
+        cleaned_df = cleaned_df.dropna(axis=0, how='any')
+        cleaned_df = cleaned_df.reset_index(drop=True)
+        cleaned_df = cleaned_df.reindex(np.random.permutation(cleaned_df.index))
         print(cleaned_df.info())
 
         #training set
@@ -64,20 +73,21 @@ class DataPreprocessing(object):
         training_set.to_csv(cleaned_data_file, encoding="utf-8")
         # testing set
         test_set = cleaned_df.iloc[len(training_set):]
+        test_set = test_set.reset_index(drop=True)
         test_set.to_csv(cleaned_test_file, encoding="utf-8")
 
-        """small_training_set = cleaned_df.iloc[0:3000]
+        small_training_set = cleaned_df.iloc[0:5000]
         small_training_set.reset_index(drop=True, inplace=True)
-        small_training_set.to_csv("./data/small_training_set.csv", encoding="utf-8")
-        small_test_set = cleaned_df.iloc[3000:4000]
-        small_test_set.to_csv("./data/small_test_set.csv", encoding="utf-8")"""
+        small_training_set.to_csv("./data/small_train_set.csv", encoding="utf-8")
+        small_test_set = cleaned_df.iloc[5000:7000]
+        small_test_set.to_csv("./data/small_test_set.csv", encoding="utf-8")
 
 if __name__ == '__main__':
     raw_data_file = "./data/consumer_complaints.csv"
     cleaned_data_file = "./data/cleaned_train_set.csv"
     cleaned_test_file = "./data/cleaned_test_set.csv"
     config = PreprocessingConfig()
-    preprocessor = DataPreprocessing(config, raw_data_file, cleaned_data_file, cleaned_test_file, 0.1)
+    preprocessor = DataPreprocessing(config, raw_data_file, cleaned_data_file, cleaned_test_file, 0.2)
 
 
 

@@ -1,7 +1,6 @@
 # Multi-Class-Text-Classification-For-Financial-Consumer-Complaints
 ## Overview
-- In this project, I built a multi-classifier based on convolutional neural network (CNN) using TensorFlow to classify ~120k
-finance consumer complaint narratives into 12 pre-defined categories. 
+- In this project, I built a multi-classifier based on convolutional neural network (CNN) using TensorFlow to classify finance consumer complaint narratives into 12 pre-defined categories. 
 - Obtained a test accuracy of 86% and average F1 score of 86%.
 
 ## Requirements
@@ -53,6 +52,13 @@ layers, visualized the training results on TensorBoard with tf.summaries, and ev
 `python cnn_text_run.py text`
 
 Replace the checkpoint dir in the Configuration class with the output from the training.
+![alt text][logo]
+
+[logo]: https://github.com/xiaojinhe/Multi-Class-Text-Classification-For-Financial-Consumer-Complaints/blob/master/metrics.png "Metrics"
+
+![alt text][logo]
+
+[logo]: https://github.com/xiaojinhe/Multi-Class-Text-Classification-For-Financial-Consumer-Complaints/blob/master/confusion.png "Confusion Matrix"
 
 ## References
 [Convolutional Neural Networks for Sentence Classification](https://arxiv.org/abs/1408.5882)

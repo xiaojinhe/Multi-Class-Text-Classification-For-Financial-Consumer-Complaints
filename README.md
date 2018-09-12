@@ -29,10 +29,6 @@ The dataset consists of ~900k examples.
 - Created label dictionary and converted labels into one hot matrices.
 - Randomly split the train set into train set and cross validation set (default cv_percentage: 10%).
 
-- Developed a model involving word embedding, convolution, max-pooling, and fully-connected with dropout
-layers, visualized the training results on TensorBoard with tf.summaries, and evaluated the model by computing precision, recall, F1 score for each class and confusion matrix using sklearn.metrics.
-- Achieved a test accuracy of 86% and average F1 score of 86%, after tuning hyperparameters and regularization.
-
 ## Convolution Neural Network
 
 ### Model

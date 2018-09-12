@@ -53,15 +53,16 @@ layers, visualized the training results on TensorBoard with tf.summaries, and ev
 
 Replace the checkpoint dir in the Configuration class with the output from the training.
 
-
+`Metrics:`
 ![alt text][logo1]
 
 [logo1]: https://github.com/xiaojinhe/Multi-Class-Text-Classification-For-Financial-Consumer-Complaints/blob/master/metrics.png "Metrics"
 
 
-![alt text][logo]
+`Confusion Matrix:`
+![alt text][logo2]
 
-[logo]: https://github.com/xiaojinhe/Multi-Class-Text-Classification-For-Financial-Consumer-Complaints/blob/master/confusion.png "Confusion Matrix"
+[logo2]: https://github.com/xiaojinhe/Multi-Class-Text-Classification-For-Financial-Consumer-Complaints/blob/master/confusion.png "Confusion Matrix"
 
 ## References
 [Convolutional Neural Networks for Sentence Classification](https://arxiv.org/abs/1408.5882)

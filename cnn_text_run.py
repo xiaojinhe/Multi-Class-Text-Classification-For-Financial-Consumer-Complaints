@@ -23,18 +23,18 @@ class Configuration(object):
     cv_percentage = 0.1
     # Hyperparameters
     embedding_size = 64
-    filter_sizes = [3, 4, 5]
+    filter_sizes = [4, 5, 6]
     num_filters = 64
     dropout_keep_prob = 0.5
-    l2_reg_lambda = 0.0
+    l2_reg_lambda = 0.05
     seq_length = 900
 
     # cnn training parameters
     batch_size = 64
-    num_epochs = 10
-    checkpoint_dir =  "./trained/1536105995/checkpoints/" 
+    num_epochs = 20
+    checkpoint_dir =  "./trained/1536365127/checkpoints/" 
     #best_validation = "./trained/checkpoints/best_validation/"
-    word2vec_path = "./data/word2vec.bin"
+    #word2vec_path = "./data/word2vec.bin"
     use_pretrained_embedding = False
     evaluate_every = 500
     learning_rate = 0.001
@@ -244,7 +244,7 @@ def test(test_file, vocabulary_dir, checkpoint_dir, seq_length):
 
     print("Building confusion matrix......")
     confusion = metrics.confusion_matrix(y_true, y_pred)
-    json.dump(metrics.classification_report(y_true, y_pred, target_names=categories), open("./data/test_metrics.json", 'w'), indent=4)
+    json.dump(metrics.classification_report(y_true, y_pred, target_names=categories), open("./data/test_confusion.json", 'w'), indent=2)
     print(confusion)
     print("Time usage: {}\n".format(datetime.timedelta(seconds=int(time.time() - start_time))))
 

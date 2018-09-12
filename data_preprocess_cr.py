@@ -44,10 +44,9 @@ class DataPreprocessing(object):
         selected_columns = ['Product', 'Consumer complaint narrative']
         df = df.drop(list(set(df.columns) - set(selected_columns)), axis=1)
 
-        df = df[df.Product != "Bank acount or service"]
-        df = df[df.Product != "Credit card"]
+        df = df[df.Product != "Checking or savings account"]
+        df = df[df.Product != "Credit card or prepaid card"]
         df = df[df.Product != "Credit reporting"]
-        df = df[df.Product != "Prepaid card"]
         df = df[df.Product != "Payday loan"]
         df = df[df.Product != "Money transfers"]
         df = df[df.Product != "Virtual currency"]

@@ -105,9 +105,8 @@ def data_preprocessing(raw_data_file, cleaned_data_file, cleaned_test_file, voca
     x, y, vocabulary_size = process_data(x_raw, y_raw, vocabulary_dir, seq_length)
     print("Spliting data......")
     # step 2: ssplit the dataset into train, cross-validation, and test sets
-    SEED = 10
     # plit the dataset into training, cross validation, and test sets
-    x_train, x_cv, y_train, y_cv = train_test_split(x, y, test_size=cv_percentage, random_state=SEED)
+    x_train, x_cv, y_train, y_cv = train_test_split(x, y, test_size=cv_percentage, random_state=10)
 
     del x, y
 

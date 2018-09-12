@@ -52,11 +52,12 @@ layers, visualized the training results on TensorBoard with tf.summaries, and ev
 `python cnn_text_run.py text`
 
 Replace the checkpoint dir in the Configuration class with the output from the training.
-![alt text][logo]
+`![alt text][logo1]`
 
-[logo]: https://github.com/xiaojinhe/Multi-Class-Text-Classification-For-Financial-Consumer-Complaints/blob/master/metrics.png "Metrics"
+[logo1]: https://github.com/xiaojinhe/Multi-Class-Text-Classification-For-Financial-Consumer-Complaints/blob/master/metrics.png "Metrics"
 
-![alt text][logo]
+
+`![alt text][logo]`
 
 [logo]: https://github.com/xiaojinhe/Multi-Class-Text-Classification-For-Financial-Consumer-Complaints/blob/master/confusion.png "Confusion Matrix"
 

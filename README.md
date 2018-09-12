@@ -46,7 +46,7 @@ layers, visualized the training results on TensorBoard with tf.summaries, and ev
   All the CNN hyperparameters and other configurations can be set in Configuration class in the cnn_text_run.py.
 
 ### Train
-'python cnn_text_run.py train'
+`python cnn_text_run.py train`
 ### Test
-'python cnn_text_run.py text'
+`python cnn_text_run.py text`
 Replace the checkpoint dir in the Configuration class with the output from the training.

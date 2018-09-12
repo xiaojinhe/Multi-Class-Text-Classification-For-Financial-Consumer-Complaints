@@ -47,6 +47,12 @@ layers, visualized the training results on TensorBoard with tf.summaries, and ev
 
 ### Train
 `python cnn_text_run.py train`
+
 ### Test
 `python cnn_text_run.py text`
+
 Replace the checkpoint dir in the Configuration class with the output from the training.
+
+## References
+[Convolutional Neural Networks for Sentence Classification](https://arxiv.org/abs/1408.5882)
+[Implementing a CNN for Text Classification in TensorFlow](http://www.wildml.com/2015/12/implementing-a-cnn-for-text-classification-in-tensorflow/)

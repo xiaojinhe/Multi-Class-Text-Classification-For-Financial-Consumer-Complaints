@@ -161,35 +161,6 @@ def train(x_train, y_train, x_cv, y_cv, vocabulary_size, config):
                     break          
 ###############################################################################
 
-"""def pretrained_word_embedding_setup(sess, vocabulary_index2word, vocabulary_size, TextCNN, word2vec_path):
-    import word2vec
-    print("Pre-trained word embedding path:", word2vec_path)
-    word2vec_model = word2vec.load(word2vec_path, kind='bin')
-    word2vec_dict = {}
-    for word, vector in zip(word2vec_model.vocab, word2vec_model.vectors):
-        word2vec_dict[word] = vector
-    # create an empty 2D embedding list and assign empty for first word: "PAD"    
-    2dlist_embedding = [[]] * vocabulary_size  
-    2dlist_embedding[0] = np.zeros(config.embedding_size)
-    limit = np.sqrt(6.0/vocabulary_size) 
-    exist = 0;
-    nonexist = 0;
-    for i in range(2, vocabulary_size):
-        word = vocabulary_index2word[i]
-        embedding_vector = word2vec_dict.get(word) 
-        if embedding_vector is not None: # the word exists an embedding
-            2dlist_embedding[i] = embedding_vector
-            exist += 1
-        else: # no embedding exists for this word: initialize a random value for the word
-            2dlist_embedding[i] = np.random.uniform(-limit, limit, config.embedding_size)
-            nonexist += 1
-    word_embedding_matrix = np.array(2dlist_embedding)
-    word_embedding = tf.constant(word_embedding_matrix, dtype=tf.float32)
-    assign_embedding = tf.assign(TextCNN.expanded_embedding_inputs, word_embedding)
-    sess.run(assign_embedding)
-    print("Existed embedding: %d, non-existed embedding: %d", exist, nonexist)
-"""
-
 def test(test_file, vocabulary_dir, checkpoint_dir, seq_length):
     print("Loading test data......")
     start_time = time.time()

@@ -32,7 +32,7 @@ The dataset consists of ~900k examples.
 ## Convolutional Neural Network
 
 ### Model
-- Word embedding layer (optional)
+- Word embedding layer
 - Convolutional layer
 - Max-pooling layer
 - Fully-connected with dropout layer

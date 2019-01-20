@@ -29,11 +29,11 @@ The dataset consists of ~900k examples.
 - Created label dictionary and converted labels into one hot matrices.
 - Randomly split the train set into train set and cross validation set (default cv_percentage: 10%).
 
-## Convolution Neural Network
+## Convolutional Neural Network
 
 ### Model
 - Word embedding layer (optional)
-- Convolution layer
+- Convolutional layer
 - Max-pooling layer
 - Fully-connected with dropout layer
 - Softmax layer
